@@ -32,3 +32,31 @@ defmodule Example do
 end
 
 Example.greeting("Sean")
+
+
+# Structs
+defmodule Example.User do
+  defstruct name: "Sean", roles: []
+end
+
+%Example.User{}
+%Example.User{name: "Steve"}
+%Example.User{name: "Steve", roles: [:manager]}
+
+steve = %Example.User{name: "steve", roles: [:maneger, :account]}
+sean = %{steve | name: "Sean"}
+{name: "Sean"} = sean
+inspect(sean)
+
+defmodule Example.User do
+  @derive {Inspect, only: [:name]}
+  defstruct name: nil, roles: []
+end
+
+defmodule Example.User do
+  @derive {Inspect, except: [:roles]}
+  defstruct name: nil, roles: []
+end
+
+sean = %Example.User{name: "Sean"}
+inspect(sean)
