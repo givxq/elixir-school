@@ -111,3 +111,41 @@ import List, only: :macros
 
 
 #require
+defmodule Example do
+  require Sayings.Greetings
+
+  #SuperMacros.do_stuff
+end
+
+
+# Use
+defmodule Hello do
+  defmacro __using__(_opts) do
+    quote do
+      def hello(name), do: "Hi, #{name}"
+    end
+  end
+end
+
+defmodule Example do
+  use Hello
+end
+
+Example.hello("Sean")
+
+
+defmodule Hello do
+  defmacro __using__(opts) do
+    greeting = Keyword.get(opts, :greeting, "Hi")
+
+    quote do
+      def hello(name), do: unquote(greeting) <> ", " <> name
+    end
+  end
+end
+
+defmodule Example do
+  use Hello, greeting: "Hola"
+end
+
+Example.hello("Sean")
