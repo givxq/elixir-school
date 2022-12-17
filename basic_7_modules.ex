@@ -60,3 +60,54 @@ end
 
 sean = %Example.User{name: "Sean"}
 inspect(sean)
+
+
+# Composition
+defmodule Sayings.Greetings do
+  def basic(name), do: "Hi, #{name}"
+end
+
+defmodule Example do
+  alias Sayings.Greetings
+
+  def greeting(name), do: Greetings.basic(name)
+end
+
+Sayings.Greetings.basic("Sean")
+Example.greeting("Sean")
+
+
+defmodule Example do
+  alias Sayings.Greetings, as: Hi
+
+  def print_message(name), do: Hi.basic(name)
+end
+
+defmodule Example do
+  alias Saying.{Greetings, Farewells}
+end
+
+Example.print_message("Sean")
+Example.Greetings.evening("Sean")
+
+
+# Import
+last([1, 2, 3])
+
+import List
+
+last([1, 2, 3])
+
+
+# Filtering
+import List, only: [last: 1]
+import List, except: [last: 1]
+
+first([1, 2, 3])
+last([1, 2, 3])
+
+import List, only: :functions
+import List, only: :macros
+
+
+#require
