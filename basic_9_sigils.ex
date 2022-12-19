@@ -27,7 +27,7 @@
 
 # 문자 리스트
 # ~c와 ~C 시길은 각각 문자 리스트를 생성합니다.
-~c/2 + 7 = #{2 + 7}/
+~c/2 + 7 = #{2 + 7}
 
 ~C/2 + 7 = #{2 + 7}/
 
@@ -55,3 +55,30 @@ re2 = ~R/elixir#{1}/
 "elixir1" =~ re2
 ~S/"elixir#{1}"/ =~ re1
 ~S/"elixir#{1}"/ =~ re2
+
+
+# 문자열
+# ~s와 ~S 시길은 문자열 데이터를 생성하는 데 사용됩니다. 예를 들면,
+~s/the cat in the hat on the mat/
+
+~S/the cat in the hat on the mat/
+
+# 차이는 무엇일까요? 차이는 앞에서 보았던 문자 리스트 시길과 비슷합니다. 정답은 식 전개와 이스케이프 시퀀스의 사용입니다. 다른 예를 한 번 들어보겠습니다.
+~s/welcom to elixir #{String.downcase "SCHOOL"}/
+
+~S/welcome to elixir #{String.downcase "SCHOOL"}/
+
+
+# 단어 리스트
+~w/i love elixir school/
+
+~W/i love elxir school/
+
+# 구분자 안에 쓰여진 것들이 공백에 의해 분리되어 리스트로 저장됨을 알 수 있습니다. 하지만 이 두 예제에서 차이점은 없어 보이네요. 이것 역시 차이점은 식 전개와 이스케이프 시퀀스에 있습니다. 다음 예제를 봅시다.
+~w/i love #{'e'}lixir school/
+
+~W/i love #{'e'}lixir school/
+
+
+# NaiveDateTime
+NaiveDateTime.from_iso8601("2015-01-23 23:50:07") == {:ok, ~N[2015-01-23 23:50:07]}
