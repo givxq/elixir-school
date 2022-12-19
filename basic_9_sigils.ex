@@ -82,3 +82,20 @@ re2 = ~R/elixir#{1}/
 
 # NaiveDateTime
 NaiveDateTime.from_iso8601("2015-01-23 23:50:07") == {:ok, ~N[2015-01-23 23:50:07]}
+
+# DateTime
+# DateTime은 UTC 타임존을 사용하는 DateTime을 나타내는 구조체를 빠르게 만드는데 유용하게 사용할 수 있습니다.
+#이는 UTC 타임존에 포함되고 문자열이 다른 타임존을 나타낼 수 있으므로, 튜플의 세번째 항목으로 초로 나타내진 오프셋을 반환합니다.
+DateTime.from_iso8601("2015-01-23 23:50:07Z") == {:ok, ~U[2015-01-23 23:50:07Z], 0}
+DateTime.from_iso8601("2015-01-23 23:50:07-0600") == {:ok, ~U[2015-01-24 05:50:07Z], -21600}
+
+
+# 시길 만들기
+defmodule Mysigils do
+  def sigil_u(string, []), do: String.upcase(string)
+end
+
+import Mysigils
+
+~u/elixir school/
+~u/elixir school #{1+2}/
