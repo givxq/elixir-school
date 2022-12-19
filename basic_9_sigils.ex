@@ -43,3 +43,15 @@ re = ~r/elixir/
 re = ~r/elixir/i
 "Elixir" =~ re  # true
 "elixir" =~ re  # true
+
+#더 나아가서, Elixir는 Erlang의 정규 표현식 라이브러리를 기반으로 만들어진 Regex API를 제공합니다. 정규 표현식 시길을 사용하여 Regex.split/2를 사용해 봅시다.
+string = "100_000_000"
+Regex.split(~r/_/, string)
+
+#ex 정규식test
+re1 = ~r/elixir#{1}/
+re2 = ~R/elixir#{1}/
+"elixir1" =~ re1
+"elixir1" =~ re2
+~S/"elixir#{1}"/ =~ re1
+~S/"elixir#{1}"/ =~ re2
