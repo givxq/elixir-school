@@ -10,5 +10,10 @@ defmodule Mix.Tasks.Hello do
 
     # 앞서 만든 Hello.say() 함수 호출하기
     Hello.say()
+
+    png =
+      :png.create(%{:size => {30, 30}, :mode => {:indexed, 8}, :file => file, :palette => palette})
+
+    IO.puts(png)
   end
 end
